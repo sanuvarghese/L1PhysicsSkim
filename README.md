@@ -67,10 +67,17 @@ Ntuple.L1NtupleRAWEMU --customise=L1Trigger/Configuration/customiseUtils.L1TGlob
 omiseSettings.L1TSettingsToCaloParams_2018_v1_3 --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7\
 -B8C5-0944-9A69-B698A2BF52EB.root 
 ```
-#### Running the L1Skim
+#### Running the L1Skim (making and submiting Jobs on Condor)
 ```
-./cmsCondorData.py runFilter_cfg.py <path to your CMSSW src directory> <path to your output directory >  -n 1 -q longlunch -p /afs/cern.ch/user/s/savarghe/private/x509up_<user proxy>  
-Submit Jobs
+./cmsCondorData.py runFilter_cfg.py <path to your CMSSW src directory> <path to your output directory >  -n 1 -q longlunch -p /afs/cern.ch/user/s/savarghe/private/x509up_<user proxy>
+```
+You can try running one test job locally
+```
+source Jobs/Job_0/sub_0.sh
+```
+If everything works out fine, Submit All Jobs on Condor
+
+```
 ./sub_total.jobb
 
 ```
