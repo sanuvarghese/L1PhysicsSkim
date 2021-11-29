@@ -56,7 +56,7 @@ scram b - j 8
 ```
 #### Now you are ready with the L1 setup.The next step is to git clone the L1Physics Skim repository and run the L1emulation using cmsDriver(eg.running on Zero Bias Data for run 323755).
 ```
-gitclone https://github.com/sanuvarghese/L1PhysicsSkim -b master
+git clone https://github.com/sanuvarghese/L1PhysicsSkim -b master
 scram b -j 8
 cd L1 PhysicsSkim/L1PhysicsFilter/test/
 voms-proxy-init --voms cms --valid 168:00
