@@ -28,25 +28,6 @@ git cms-checkdeps -A -a
 scram b -j 8
 
 ```
-Once the Initial setup is done, edit the end part of HLTrigger/HLTcore/interface/HLTPreScaleProvider.h like this( needed for CMSSW 11_X and above)  
-
-After the line 
-```
-HLTPrescaleProvider::HLTPrescaleProvider(edm::ParameterSet const& pset, edm::ConsumesCollector& iC, T& module) {
-```
-set the stageL1Trigger parameter to 2
-
-```diff
-- unsigned int stageL1Trigger = pset.getParameter<unsigned int>("stageL1Trigger");
-+ unsigned int stageL1Trigger = 2 ;                                          
-  if (stageL1Trigger <= 1) {
-    l1GtUtils_ = std::make_unique<L1GtUtils>(pset, iC, false, module, L1GtUtils::UseEventSetupIn::Run);
-  } else {
-    l1tGlobalUtil_ = std::make_unique<l1t::L1TGlobalUtil>(pset, iC, module, l1t::UseEventSetupIn::Run);
-  }
-}
-#endif
-```
 ## Customisation of L1Menu 
 Here you will be customising the L1 emulator using the your new L1 menu. For more details follow Elisa Fontanesi's [L1 emulator tutorial](https://indico.cern.ch/event/1060362/contributions/4455932/attachments/2286815/3937192/L1T_Tutorial_Emulator.pdf) 
 ```diff
