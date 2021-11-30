@@ -86,8 +86,8 @@ inputFileNames=[
 ```
 As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already availble in this repository. 
 
-```
 #### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver .
+```
 cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 2000 --no_output --era=Run2_2018 --data --conditions=\
 112X_dataRun2_v7 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/L1TNtuples/customiseL1\
 Ntuple.L1NtupleRAWEMU --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML --customise=L1Trigger/Configuration/cust\
@@ -123,8 +123,7 @@ If everything works out fine, Submit All Jobs on Condor
 ./sub_total.jobb
 
 ```
-
-#### When the Jobs are done ,New Filtered Ntuples (containing only events that pass the L1 Trigger with the new menu named L1_0.root, L1_1.root etc) will be produced in the output directory.
+When the Jobs are done, New Filtered Ntuples (containing only events that pass the L1 Trigger with the new menu named L1_0.root, L1_1.root etc) will be produced in the output directory.
 
 
 
