@@ -64,7 +64,7 @@ scram b -j 8
 
  Now you are ready with the L1 setup.The next step is to git clone the L1Physics Skim repository and run the L1emulation using cmsDriver(eg.running on Zero Bias Data for run 323755).
 ```
-git clone https://github.com/sanuvarghese/L1PhysicsSkim 
+git clone https://github.com/sanuvarghese/L1PhysicsSkim.git
 scram b -j 8
 cd L1PhysicsSkim/L1PhysicsFilter/test/
 ```  
