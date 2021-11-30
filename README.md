@@ -93,7 +93,7 @@ inputFileNames=[
 
 ]
 ```
-As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already availble in the test directory. 
+As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already available in the test directory. 
 
 #### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
