@@ -79,19 +79,21 @@ dasgoclient --query="file dataset=/EphemeralZeroBias1/Run2018D-v1/RAW and run=32
 You need to repeat it for EphemeralZeroBias{1-8} and combine the file paths into a single txt file   
 (eg $ cat ZB1.txt ZB2.txt .. ZB8.txt > ZB.txt)  
 
-Next step is to create a list_cff.py file in the format
+Next step is to create a list_cff.py file in the format (edit the ZB.txt accordingly and rename to list_cff.py)
 ```
 inputFileNames=[
 
-'file:/eos/cms/store/path/to/file/1.root',
-
-'file:/eos/cms/store/path/to/file/2.root',
+inputFileNames=[
+'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/02506E54-CE47-A649-9F80-117E978DC69E.root',
+'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root',
+'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/11FC721B-C288-2342-B356-317FD2457444.root',
+'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/1507559B-D021-E648-8100-010C4698D4DB.root',
 
 ...
 
 ]
 ```
-As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already availble in this repository. 
+As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already availble in the test directory. 
 
 #### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
