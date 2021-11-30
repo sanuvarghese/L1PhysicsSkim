@@ -56,8 +56,8 @@ void L1PhysicsFilter::beginRun(const edm::Run& run,const edm::EventSetup& setup)
   bool changed=false;
   hltPSProv_.init(run,setup,hltProcess_,changed);
   const l1t::L1TGlobalUtil& l1GtUtils = hltPSProv_.l1tGlobalUtil();
-  std::cout <<"l1 menu "<<l1GtUtils.gtTriggerMenuName()<<" version "<<l1GtUtils.gtTriggerMenuVersion()<<" comment "<<std::endl;
-  std::cout <<"hlt name "<<hltPSProv_.hltConfigProvider().tableName()<<std::endl;
+ // std::cout <<"l1 menu "<<l1GtUtils.gtTriggerMenuName()<<" version "<<l1GtUtils.gtTriggerMenuVersion()<<" comment "<<std::endl;
+ // std::cout <<"hlt name "<<hltPSProv_.hltConfigProvider().tableName()<<std::endl;
 }
  bool L1PhysicsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) {
     //I seem to recall this function being slow so perhaps cache for a given lumi
