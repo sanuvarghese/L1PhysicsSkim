@@ -29,10 +29,15 @@ scram b -j 8
 
 ```
 #### After the Initial setup is done, edit the end part of HLTrigger/HLTcore/interface/HLTPreScaleProvider.h like this( needed for CMSSW 11_X and above)
-
+After the line 
 ```
 HLTPrescaleProvider::HLTPrescaleProvider(edm::ParameterSet const& pset, edm::ConsumesCollector& iC, T& module) {
-  unsigned int stageL1Trigger = 2;//pset.getParameter<unsigned int>("stageL1Trigger");                                             
+```
+set the stageL1Trigger parameter to 2
+
+```diff
+- unsigned int stageL1Trigger = pset.getParameter<unsigned int>("stageL1Trigger");
++ unsigned int stageL1Trigger = 2 ;                                          
   if (stageL1Trigger <= 1) {
     l1GtUtils_ = std::make_unique<L1GtUtils>(pset, iC, false, module, L1GtUtils::UseEventSetupIn::Run);
   } else {
@@ -62,6 +67,7 @@ git clone https://github.com/sanuvarghese/L1PhysicsSkim
 scram b -j 8
 cd L1PhysicsSkim/L1PhysicsFilter/test/
 ```  
+#### Input Files
 The L1 Skim should be run either on Zero Bias samples or MC. Do not run the skimmer on EphemeralHLTPhysics dataset because an L1 menu is already applied on them.Here we will be considering ZB. Since most(if not all) Zero Bias Datasets are not available locaaly on eos, you need to create your own list_cff.py containing the paths of the runs you are considering from DAS. You can obtain the file names directly from the command line using dasgoclient query
 ```
 voms-proxy-init --voms cms --valid 168:00
@@ -87,6 +93,7 @@ inputFileNames=[
 As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already availble in this repository. 
 
 #### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver .
+
 ```
 cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 2000 --no_output --era=Run2_2018 --data --conditions=\
 112X_dataRun2_v7 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/L1TNtuples/customiseL1\
@@ -95,7 +102,23 @@ omiseSettings.L1TSettingsToCaloParams_2018_v1_3 --filein=/store/data/Run2018D/Ep
 -B8C5-0944-9A69-B698A2BF52EB.root 
 ```  
 ##### Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter.  
-(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU ).
+(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU ).  
+
+After cmsDriver finishes running, comment out the following lines of the newly created data.py file
+```  
+# Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple                                     
+#from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU   
+#call to customisation function L1NtupleRAWEMU imported from L1Trigger.L1TNtuples.customiseL1Ntuple                                
+#process = L1NtupleRAWEMU(process)  
+``` 
+comment out also the lines at the end
+``` 
+# Add early deletion of temporary data products to reduce peak memory need                                                         
+#from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete                                          
+#process = customiseEarlyDelete(process)                                                                                           
+# End adding early deletion 
+``` 
+
 ### Creating and submiting Jobs on Condor
 
 Create an output directory for your future root files:  
