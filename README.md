@@ -60,7 +60,7 @@ scram b -j 8
 ```
 git clone https://github.com/sanuvarghese/L1PhysicsSkim -b master
 scram b -j 8
-cd L1 PhysicsSkim/L1PhysicsFilter/test/
+cd L1PhysicsSkim/L1PhysicsFilter/test/
 ```  
 The L1 Skim should be run either on Zero Bias samples or MC. Do not run the skimmer on EphemeralHLTPhysics dataset because an L1 menu is already applied on them.Here we will be considering ZB. Since most(if not all) Zero Bias Datasets are not available locaaly on eos, you need to create your own list_cff.py containing the paths of the runs you are considering from DAS. You can obtain the file names directly from the command line using dasgoclient query
 ```
