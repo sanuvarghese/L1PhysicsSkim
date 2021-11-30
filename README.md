@@ -47,7 +47,7 @@ set the stageL1Trigger parameter to 2
 #endif
 ```
 ## Customisation of L1Menu 
-Here you will be customising the L1 emulator using the your new L1 menu. For more details follow Elisa Fontanesi's L1 emulator tutorial https://indico.cern.ch/event/1060362/contributions/4455932/attachments/2286815/3937192/L1T_Tutorial_Emulator.pdf .
+Here you will be customising the L1 emulator using the your new L1 menu. For more details follow Elisa Fontanesi's [L1 emulator tutorial](https://indico.cern.ch/event/1060362/contributions/4455932/attachments/2286815/3937192/L1T_Tutorial_Emulator.pdf) 
 ```
 ★ Check if you have the package L1Trigger/L1TCommon, otherwise add it:
 git cms-addpkg L1Trigger/L1TCommon
@@ -92,7 +92,7 @@ inputFileNames=[
 ```
 As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already availble in this repository. 
 
-##### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver .
+##### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
 ```
 cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 2000 --no_output --era=Run2_2018 --data --conditions=\
