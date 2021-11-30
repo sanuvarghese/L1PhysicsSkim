@@ -49,7 +49,7 @@ set the stageL1Trigger parameter to 2
 ```
 ## Customisation of L1Menu 
 Here you will be customising the L1 emulator using the your new L1 menu. For more details follow Elisa Fontanesi's [L1 emulator tutorial](https://indico.cern.ch/event/1060362/contributions/4455932/attachments/2286815/3937192/L1T_Tutorial_Emulator.pdf) 
-```
+```diff
 ★ Check if you have the package L1Trigger/L1TCommon, otherwise add it:
 git cms-addpkg L1Trigger/L1TCommon
 ★ Add the latest L1Trigger/L1TGlobal package:
@@ -57,7 +57,9 @@ git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 ★ Upload the XML file into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
-process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') → L1Menu_Collisions2022_v0_1_1_modified.xml
+- process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_1_modified.xml')
+
 scram b -j 8
 ```
 ## Running the L1 Skim  
@@ -82,8 +84,6 @@ You need to repeat it for EphemeralZeroBias{1-8} and combine the file paths into
 Next step is to create a list_cff.py file in the format (edit the ZB.txt accordingly and rename to list_cff.py)
 ```
 inputFileNames=[
-
-inputFileNames=[
 '/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/02506E54-CE47-A649-9F80-117E978DC69E.root',
 '/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root',
 '/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/11FC721B-C288-2342-B356-317FD2457444.root',
@@ -107,18 +107,19 @@ omiseSettings.L1TSettingsToCaloParams_2018_v1_3 --filein=/store/data/Run2018D/Ep
 Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
 
 After cmsDriver finishes running, comment out the following lines of the newly created data.py file
-```  
-# Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple                                     
-#from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU   
-#call to customisation function L1NtupleRAWEMU imported from L1Trigger.L1TNtuples.customiseL1Ntuple                                
-#process = L1NtupleRAWEMU(process)  
-``` 
+
+```diff
++ # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple                                     
++ #from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU   
++ #call to customisation function L1NtupleRAWEMU imported from L1Trigger.L1TNtuples.customiseL1Ntuple                                
++ #process = L1NtupleRAWEMU(process)  
+```
 comment out also the lines at the end
-``` 
-# Add early deletion of temporary data products to reduce peak memory need                                                         
-#from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete                                          
-#process = customiseEarlyDelete(process)                                                                                           
-# End adding early deletion 
+```diff 
++ # Add early deletion of temporary data products to reduce peak memory need                                                         
++ #from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete                                          
++ #process = customiseEarlyDelete(process)                                                                                           
++ # End adding early deletion 
 ``` 
 
 ## Creating and submiting Jobs on Condor
