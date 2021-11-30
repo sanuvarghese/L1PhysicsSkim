@@ -46,7 +46,7 @@ set the stageL1Trigger parameter to 2
 }
 #endif
 ```
-### Customisation of L1Menu 
+## Customisation of L1Menu 
 Here you will be customising the L1 emulator using the your new L1 menu. For more details follow Elisa Fontanesi's L1 emulator tutorial https://indico.cern.ch/event/1060362/contributions/4455932/attachments/2286815/3937192/L1T_Tutorial_Emulator.pdf .
 ```
 ★ Check if you have the package L1Trigger/L1TCommon, otherwise add it:
@@ -67,7 +67,7 @@ git clone https://github.com/sanuvarghese/L1PhysicsSkim
 scram b -j 8
 cd L1PhysicsSkim/L1PhysicsFilter/test/
 ```  
-#### Input Files
+### Input Files
 The L1 Skim should be run either on Zero Bias samples or MC. Do not run the skimmer on EphemeralHLTPhysics dataset because an L1 menu is already applied on them.Here we will be considering ZB. Since most(if not all) Zero Bias Datasets are not available locally on eos, you need to create your own list_cff.py containing the paths of the runs you are considering from DAS. You can obtain the file names directly from the command line using dasgoclient query
 ```
 voms-proxy-init --voms cms --valid 168:00
@@ -119,7 +119,7 @@ comment out also the lines at the end
 # End adding early deletion 
 ``` 
 
-### Creating and submiting Jobs on Condor
+## Creating and submiting Jobs on Condor
 
 Create an output directory for your future root files:  
 ```
