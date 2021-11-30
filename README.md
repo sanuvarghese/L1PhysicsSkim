@@ -93,7 +93,7 @@ inputFileNames=[
 ```
 As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 is already availble in this repository. 
 
-##### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
+#### The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
 ```
 cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 2000 --no_output --era=Run2_2018 --data --conditions=\
@@ -102,8 +102,7 @@ Ntuple.L1NtupleRAWEMU --customise=L1Trigger/Configuration/customiseUtils.L1TGlob
 omiseSettings.L1TSettingsToCaloParams_2018_v1_3 --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7\
 -B8C5-0944-9A69-B698A2BF52EB.root 
 ```  
-##### Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter.  
-(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU ).  
+Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
 
 After cmsDriver finishes running, comment out the following lines of the newly created data.py file
 ```  
