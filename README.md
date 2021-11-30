@@ -149,7 +149,7 @@ If everything works out fine, Submit All Jobs on Condor
 ./sub_total.jobb
 
 ```
-When the Jobs are done, New Filtered Ntuples (containing only events that pass the L1 Trigger with the new menu named L1_0.root, L1_1.root etc) will be produced in the output directory.
+When the Jobs are done, New Filtered Raw root files (containing only events that pass the L1 Trigger with the new menu named L1_0.root, L1_1.root etc) will be produced in the output directory.
 
 
 
