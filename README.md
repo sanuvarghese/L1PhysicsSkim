@@ -28,7 +28,8 @@ git cms-checkdeps -A -a
 scram b -j 8
 
 ```
-#### After the Initial setup is done, edit the end part of HLTrigger/HLTcore/interface/HLTPreScaleProvider.h like this( needed for CMSSW 11_X and above)
+Once the Initial setup is done, edit the end part of HLTrigger/HLTcore/interface/HLTPreScaleProvider.h like this( needed for CMSSW 11_X and above)  
+
 After the line 
 ```
 HLTPrescaleProvider::HLTPrescaleProvider(edm::ParameterSet const& pset, edm::ConsumesCollector& iC, T& module) {
