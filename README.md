@@ -28,7 +28,7 @@ git cms-checkdeps -A -a
 scram b -j 8
 
 ```
-## Customisation of L1Menu 
+## Customisation of L1 Menu 
 Here you will be customising the L1 emulator using the your new L1 menu. For more details follow Elisa Fontanesi's [L1 emulator tutorial](https://indico.cern.ch/event/1060362/contributions/4455932/attachments/2286815/3937192/L1T_Tutorial_Emulator.pdf) 
 ```diff
 ★ Check if you have the package L1Trigger/L1TCommon, otherwise add it:
