@@ -40,7 +40,7 @@ def insert_modules_after(process, target, *modules):
                 sequence.insert(position+1, module)
 
 process.L1PhysicsFilter = cms.EDFilter("L1PhysicsFilter",
-                                       hltProcess=cms.string("HLT2")
+                                       hltProcess=cms.string("HLT2"),
                                        stageL1Trigger=cms.uint32(2)
                                        )
 
