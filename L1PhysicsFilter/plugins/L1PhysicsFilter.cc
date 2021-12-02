@@ -56,20 +56,20 @@ void L1PhysicsFilter::beginRun(const edm::Run& run,const edm::EventSetup& setup)
   bool changed=false;
   hltPSProv_.init(run,setup,hltProcess_,changed);
   const l1t::L1TGlobalUtil& l1GtUtils = hltPSProv_.l1tGlobalUtil();
- // std::cout <<"l1 menu "<<l1GtUtils.gtTriggerMenuName()<<" version "<<l1GtUtils.gtTriggerMenuVersion()<<" comment "<<std::endl;
- // std::cout <<"hlt name "<<hltPSProv_.hltConfigProvider().tableName()<<std::endl;
+  std::cout <<"l1 menu "<<l1GtUtils.gtTriggerMenuName()<<" version "<<l1GtUtils.gtTriggerMenuVersion()<<" comment "<<std::endl;
+  std::cout <<"hlt name "<<hltPSProv_.hltConfigProvider().tableName()<<std::endl;
 }
  bool L1PhysicsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) {
     //I seem to recall this function being slow so perhaps cache for a given lumi
     //(it only changes on lumi boundaries)
     int psColumn = hltPSProv_.prescaleSet(iEvent,iSetup);
-    std::cout <<"PS column "<<psColumn<<std::endl;
+    //std::cout <<"PS column "<<psColumn<<std::endl;
     if(psColumn==0 && iEvent.isRealData()){
       std::cout <<"PS column zero detected for data, this is unlikely (almost all triggers are disabled in normal menus here) and its more likely that you've not loaded the correct global tag in "<<std::endl;
     }
 //using namespace edm;
     l1t::L1TGlobalUtil& l1GtUtils = const_cast<l1t::L1TGlobalUtil&> (hltPSProv_.l1tGlobalUtil());
-    std::cout <<"l1 menu: name decisions prescale "<<std::endl;
+    //std::cout <<"l1 menu: name decisions prescale "<<std::endl;
     bool passEvents = false;
     for(size_t bitNr=0;bitNr<l1GtUtils.decisionsFinal().size();bitNr++){
       if(bitNr >= 458) continue;
