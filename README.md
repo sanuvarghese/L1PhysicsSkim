@@ -78,7 +78,7 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 500 --no_output -
 ```  
 Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
 
-#### After cmsDriver finishes running, make the following changes in newly created data.py file.  
+#### After cmsDriver finishes running, make the following changes in the newly created data.py file.  
 Change the process name from "RAW2DIGI" to "HLT2"
 ```diff
 - process = cms.Process('RAW2DIGI',Run2_2018)
