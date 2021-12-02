@@ -87,8 +87,13 @@ omiseSettings.L1TSettingsToCaloParams_2018_v1_3 --filein=/store/data/Run2018D/Ep
 ```  
 Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
 
-After cmsDriver finishes running, comment out the following lines of the newly created data.py file
-
+#### After cmsDriver finishes running, make the following changes in newly created data.py file.  
+Change the process name from "RAW2DIGI" to "HLT2"
+```diff
+- process = cms.Process('RAW2DIGI',Run2_2018)
++ process = cms.Process('HLT2',Run2_2018)
+```  
+Comment out the following lines
 ```diff
 + # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple                                     
 + #from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU   
