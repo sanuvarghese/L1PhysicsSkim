@@ -124,6 +124,9 @@ Submit All Jobs on Condor
 ```
 When the Jobs are done, New Filtered Raw root files (containing only events that pass the L1 Trigger with the new menu named L1_0.root, L1_1.root etc) will be produced in the output directory.
 
+### Additional Links
+1. [L1 Menu for Run 3](https://twiki.cern.ch/twiki/bin/viewauth/CMS/SWGuideL1TriggerMenu#L1_Menus_for_Run_3)
+
 
 
 
