@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os, sys,  imp, re, pprint, string
 from optparse import OptionParser
@@ -36,11 +36,11 @@ cfgFileName = str(args[0])
 cmsEnv = str(args[1])
 remoteDir = str(args[2])
 
-print 'config file = %s'%cfgFileName
-print 'CMSSWrel = %s'%cmsEnv
-print 'proxy = %s'%opts.proxyPath
-print 'remote directory = %s'%remoteDir
-print 'job flavour = %s'%opts.jobFlavour
+print('config file = %s'%cfgFileName)
+print('CMSSWrel = %s'%cmsEnv)
+print('proxy = %s'%opts.proxyPath)
+print('remote directory = %s'%remoteDir)
+print('job flavour = %s'%opts.jobFlavour)
 
 
 #make directories for the jobs
@@ -48,7 +48,7 @@ try:
     os.system('rm -rf Jobs')
     os.system('mkdir Jobs')
 except:
-    print "err!"
+    print("err!")
     pass
 
 
@@ -70,18 +70,18 @@ nJobs = -1
 try:
     process.source.fileNames
 except:
-    print 'No input file. Exiting.'
+    print('No input file. Exiting.')
     sys.exit(2)
 else:
-    print "Number of files in the source:",len(process.source.fileNames), ":"
+    print("Number of files in the source:",len(process.source.fileNames), ":")
     pprint.pprint(process.source.fileNames)
    
     nFiles = len(process.source.fileNames)
-    nJobs = nFiles / opts.nPerJob
+    nJobs = int(nFiles / opts.nPerJob)
     if (nJobs!=0 and (nFiles % opts.nPerJob) > 0) or nJobs==0:
         nJobs = nJobs + 1
       
-    print "number of jobs to be created: ", nJobs
+    print("number of jobs to be created: ", nJobs)
     
 
 
@@ -118,7 +118,7 @@ for i in range(0, nJobs):
     tmp_job.close()
     os.system("chmod +x %s"%(jobDir+tmp_jobname))
 
-    print "preparing job number %s/%s"%(str(i), nJobs-1)
+    print("preparing job number %s/%s"%(str(i), nJobs-1))
 
     iFileMin = i*opts.nPerJob
     iFileMax = (i+1)*opts.nPerJob
