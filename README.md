@@ -125,11 +125,7 @@ Create condor jobs for data by running the cmsCondorData.py script, for MC by ru
 ```
 ./cmsCondorData.py runFilter_cfg.py <path to your CMSSW src directory> <path to your output directory >  -n 1 -q longlunch -p /afs/cern.ch/user/<first letter>/<username>/private/x509up_<user proxy>
 ```
-You can try running one test job locally
-```
-source Jobs/Job_0/sub_0.sh
-```
-If everything works out fine, Submit All Jobs on Condor
+Submit All Jobs on Condor
 
 ```
 ./sub_total.jobb
