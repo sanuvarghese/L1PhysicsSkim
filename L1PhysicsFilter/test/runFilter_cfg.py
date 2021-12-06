@@ -41,7 +41,8 @@ def insert_modules_after(process, target, *modules):
 
 process.L1PhysicsFilter = cms.EDFilter("L1PhysicsFilter",
                                        hltProcess=cms.string("HLT2"),
-                                       stageL1Trigger=cms.uint32(2)
+                                       stageL1Trigger=cms.uint32(2),
+                                       maxBitNr=cms.uint32(458)
                                        )
 
 process.l1filter_step = cms.Path(process.L1PhysicsFilter)
