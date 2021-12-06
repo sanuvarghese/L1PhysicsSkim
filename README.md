@@ -90,14 +90,8 @@ Change the process name from "RAW2DIGI" to "HLT2"
 - process = cms.Process('RAW2DIGI',Run2_2018)
 + process = cms.Process('HLT2',Run2_2018)
 ```  
-Comment out the following lines
-```diff
-+ # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple                                     
-+ #from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU   
-+ #call to customisation function L1NtupleRAWEMU imported from L1Trigger.L1TNtuples.customiseL1Ntuple                                
-+ #process = L1NtupleRAWEMU(process)  
-```
-comment out also the lines at the end
+
+comment out  the lines at the end
 ```diff 
 + # Add early deletion of temporary data products to reduce peak memory need                                                         
 + #from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete                                          
