@@ -25,6 +25,7 @@ private:
   
   HLTPrescaleProvider hltPSProv_;  
   std::string hltProcess_; //name of HLT process, usually "HLT"
+  unsigned int maxBitNr_;
 public:
   explicit L1PhysicsFilter(const edm::ParameterSet&);
   ~L1PhysicsFilter(){};
@@ -47,7 +48,8 @@ private:
 L1PhysicsFilter::L1PhysicsFilter(const edm::ParameterSet& iConfig):
 
   hltPSProv_(iConfig,consumesCollector(),*this), //it needs a referernce to the calling module for some reason, hence the *this
-  hltProcess_(iConfig.getParameter<std::string>("hltProcess"))
+  hltProcess_(iConfig.getParameter<std::string>("hltProcess")),
+  maxBitNr_(iConfig.getParameter<unsigned int>("maxBitNr"))
 {
 
 }
@@ -72,7 +74,7 @@ void L1PhysicsFilter::beginRun(const edm::Run& run,const edm::EventSetup& setup)
     //std::cout <<"l1 menu: name decisions prescale "<<std::endl;
     bool passEvents = false;
     for(size_t bitNr=0;bitNr<l1GtUtils.decisionsFinal().size();bitNr++){
-      if(bitNr >= 458) continue;
+      if(bitNr >= maxBitNr_) continue;
       //const std::string& bitName = l1GtUtils.decisionsFinal()[bitNr].first; // l1GtUtils.decisionsFinal() is of type std::vector<std::pair<std::string,bool> >
       
       bool passFinal = l1GtUtils.decisionsFinal()[bitNr].second; //after masks & prescales, true means it gives a L1 accept to the HLT
