@@ -123,7 +123,7 @@ Submit All Jobs on Condor
 When the Jobs are done, New Filtered Raw root files (containing only events that pass the L1 Trigger with the new menu named L1_0.root, L1_1.root etc) will be produced in the output directory.
 
 ### Some Comments about the Skimmer
-The skimmer uses the L1GT utils tool to access L1 Trigger decisions and saves events that pass the L1 Trigger bits less than a maxBitNr(maxBitNr==458 for the modified [L1 menu](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1Menu_Collisions2022_v0_1_1) corresponding to the physics based trigger bits). If you want to apply your customised L1 menu with new L1 seeds, you need to change this parameter(maxBitNr) accordingly in the run_Filter_cfg.py config file.
+The skimmer uses the [L1GTUtils](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TriggerL1GtUtils) tool to access L1 Trigger decisions and saves events that pass the L1 Trigger bits less than a maxBitNr(maxBitNr==458 for the modified [L1 menu](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1Menu_Collisions2022_v0_1_1) corresponding to the physics based trigger bits). If you want to apply your customised L1 menu with new L1 seeds, you need to change this parameter(maxBitNr) accordingly in the run_Filter_cfg.py config file.
 ```diff
  process.L1PhysicsFilter = cms.EDFilter("L1PhysicsFilter",
                                        hltProcess=cms.string("HLT2"),
