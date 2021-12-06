@@ -78,7 +78,7 @@ cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 500 --no_output -
 
 
 ```  
-If you get an import Command error(import Command is deprecated for python 3), replace the "import command" line in L1Trigger/Configuration/python/customiseUtils.py with "import subprocess" (I dont think it is used anywhere!)  
+If you get an "import command" error(import command is deprecated for python 3), replace the "import command" line in L1Trigger/Configuration/python/customiseUtils.py with "import subprocess" (I dont think it is used anywhere!)  
 
 Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
 
