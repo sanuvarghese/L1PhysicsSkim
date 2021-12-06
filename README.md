@@ -39,7 +39,7 @@ mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 ★ Upload the XML file into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
-+ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_1_modified.xml')
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_1.xml')
 
 scram b -j 8
 ```
