@@ -74,8 +74,12 @@ As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 
 The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
 ```
-cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 500 --no_output --era=Run2_2018 --data --conditions=120X_dataRun2_v2 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleAODRAWEMU --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParams_2018_v1_3 --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root
+cmsDriver.py l1Ntuple -s RAW2DIGI --python_filename=data.py -n 500 --no_output --era=Run2_2018 --data --conditions=120X_dataRun2_v2 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML --customise=L1Trigger/Configuration/customiseSettings.L1TSettingsToCaloParams_2018_v1_3 --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root
+
+
 ```  
+If you get an import Command warning(import Command is deprecated for python 3), replace the "import command" line in L1Trigger/Configuration/python/customiseUtils.py with "import subprocess" (I dont think it is not used anywhere)  
+
 Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
 
 #### After cmsDriver finishes running, make the following changes in the newly created data.py file.  
@@ -84,14 +88,8 @@ Change the process name from "RAW2DIGI" to "HLT2"
 - process = cms.Process('RAW2DIGI',Run2_2018)
 + process = cms.Process('HLT2',Run2_2018)
 ```  
-Comment out the following lines
-```diff
-  # Automatic addition of the customisation function from L1Trigger.L1TNtuples.customiseL1Ntuple                                     
-+ #from L1Trigger.L1TNtuples.customiseL1Ntuple import L1NtupleRAWEMU   
-  #call to customisation function L1NtupleRAWEMU imported from L1Trigger.L1TNtuples.customiseL1Ntuple                                
-+ #process = L1NtupleRAWEMU(process)  
-```
-comment out also the lines at the end
+
+comment out the lines at the end
 ```diff
   # Add early deletion of temporary data products to reduce peak memory need                                                         
 + #from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete                                          
