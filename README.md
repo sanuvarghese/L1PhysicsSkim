@@ -128,7 +128,7 @@ The skimmer uses the [L1GTUtils](https://twiki.cern.ch/twiki/bin/view/CMSPublic/
  process.L1PhysicsFilter = cms.EDFilter("L1PhysicsFilter",
                                        hltProcess=cms.string("HLT2"),
                                        stageL1Trigger=cms.uint32(2),
-++                                       maxBitNr=cms.uint32(458)
+++                                     maxBitNr=cms.uint32(458)
                                        )
 
 ```
