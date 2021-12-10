@@ -76,6 +76,7 @@ void L1PhysicsFilter::beginRun(const edm::Run& run,const edm::EventSetup& setup)
     for(size_t bitNr=0;bitNr<l1GtUtils.decisionsFinal().size();bitNr++){
       if(bitNr >= maxBitNr_) continue;
       //const std::string& bitName = l1GtUtils.decisionsFinal()[bitNr].first; // l1GtUtils.decisionsFinal() is of type std::vector<std::pair<std::string,bool> >
+     // bool passInitial = l1GtUtils.decisionsInitial()[bitNr].second; //before masks and prescales
       
       bool passFinal = l1GtUtils.decisionsFinal()[bitNr].second; //after masks & prescales, true means it gives a L1 accept to the HLT
       if (passFinal){
