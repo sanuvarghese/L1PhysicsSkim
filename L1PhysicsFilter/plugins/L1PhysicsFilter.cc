@@ -1,4 +1,4 @@
-//         Created:  Wed, 29 Sep 2021 09:58:17 GMT
+//         Created:  Wed, 15 Dec 2021 17:36:13 GMT
 //         Original Author: Sanu Varghese
 //
 
@@ -8,24 +8,24 @@
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/stream/EDFilter.h"
-
+#include<vector>
+#include "CondFormats/DataRecord/interface/L1TUtmTriggerMenuRcd.h"
+#include "CondFormats/L1TObjects/interface/L1TUtmTriggerMenu.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
-
+#include "DataFormats/L1TGlobal/interface/GlobalAlgBlk.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 #include "FWCore/Utilities/interface/StreamID.h"
-#include "HLTrigger/HLTcore/interface/HLTPrescaleProvider.h"
-//#include "L1Trigger/GlobalTriggerAnalyzer/interface/L1GtUtils.h"
-//
+#include "FWCore/Framework/interface/ESHandle.h"
+#include "FWCore/Framework/interface/EventSetup.h"
 // class declaration
 //
 
 class L1PhysicsFilter : public edm::stream::EDFilter<> {
 private:
-  
-  HLTPrescaleProvider hltPSProv_;  
+    
   std::string hltProcess_; //name of HLT process, usually "HLT"
-  unsigned int maxBitNr_;
+  
 public:
   explicit L1PhysicsFilter(const edm::ParameterSet&);
   ~L1PhysicsFilter(){};
@@ -33,64 +33,62 @@ public:
   //  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
 private:
-  //  virtual void beginStream(edm::StreamID) override;
-  //virtual void beginJob(){}
-  virtual void beginRun(const edm::Run& run,const edm::EventSetup& iSetup) override;
+  virtual void beginRun(const edm::Run& ,const edm::EventSetup& ) override;
   //virtual void analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup);
   virtual bool filter(edm::Event&, const edm::EventSetup&) override;
-  // virtual void endStream() override;
-  //virtual void endJob(){}
+  //GlobalAlgBlk const *results_;
+  const edm::EDGetTokenT<GlobalAlgBlkBxCollection> ugt_token_;
+  //  unsigned long long cache_id_;
 };
-  //virtual void beginRun(edm::Run const&, edm::EventSetup const&) override;
-  //virtual void endRun(edm::Run const&, edm::EventSetup const&) override;
-  //virtual void beginLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
-  //virtual void endLuminosityBlock(edm::LuminosityBlock const&, edm::EventSetup const&) override;
 L1PhysicsFilter::L1PhysicsFilter(const edm::ParameterSet& iConfig):
-
-  hltPSProv_(iConfig,consumesCollector(),*this), //it needs a referernce to the calling module for some reason, hence the *this
   hltProcess_(iConfig.getParameter<std::string>("hltProcess")),
-  maxBitNr_(iConfig.getParameter<unsigned int>("maxBitNr"))
+  //results_(nullptr),
+  ugt_token_(consumes<GlobalAlgBlkBxCollection>(iConfig.getParameter<edm::InputTag>("ugtToken")))
+  //cache_id_(0)
 {
 
 }
 void L1PhysicsFilter::beginRun(const edm::Run& run,const edm::EventSetup& setup)
 {
-  bool changed=false;
-  hltPSProv_.init(run,setup,hltProcess_,changed);
-  const l1t::L1TGlobalUtil& l1GtUtils = hltPSProv_.l1tGlobalUtil();
-  std::cout <<"l1 menu "<<l1GtUtils.gtTriggerMenuName()<<" version "<<l1GtUtils.gtTriggerMenuVersion()<<" comment "<<std::endl;
-  std::cout <<"hlt name "<<hltPSProv_.hltConfigProvider().tableName()<<std::endl;
 }
- bool L1PhysicsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) {
-    //I seem to recall this function being slow so perhaps cache for a given lumi
-    //(it only changes on lumi boundaries)
-    int psColumn = hltPSProv_.prescaleSet(iEvent,iSetup);
-    //std::cout <<"PS column "<<psColumn<<std::endl;
-    if(psColumn==0 && iEvent.isRealData()){
-      std::cout <<"PS column zero detected for data, this is unlikely (almost all triggers are disabled in normal menus here) and its more likely that you've not loaded the correct global tag in "<<std::endl;
-    }
-//using namespace edm;
-    l1t::L1TGlobalUtil& l1GtUtils = const_cast<l1t::L1TGlobalUtil&> (hltPSProv_.l1tGlobalUtil());
-    //std::cout <<"l1 menu: name decisions prescale "<<std::endl;
-    bool passEvents = false;
-    for(size_t bitNr=0;bitNr<l1GtUtils.decisionsFinal().size();bitNr++){
-      if(bitNr >= maxBitNr_) continue;
-      //const std::string& bitName = l1GtUtils.decisionsFinal()[bitNr].first; // l1GtUtils.decisionsFinal() is of type std::vector<std::pair<std::string,bool> >
-     // bool passInitial = l1GtUtils.decisionsInitial()[bitNr].second; //before masks and prescales
-      
-      bool passFinal = l1GtUtils.decisionsFinal()[bitNr].second; //after masks & prescales, true means it gives a L1 accept to the HLT
-      if (passFinal){
-      passEvents=true;
-      break;
+//bool L1PhysicsFilter::filter(edm::Event const &event, edm::EventSetup const &setup) { 
+bool L1PhysicsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)  {
+
+  // using namespace edm;
+  bool passEvents = false;
+  //unsigned long long id = iSetup.get<L1TUtmTriggerMenuRcd>().cacheIdentifier();
+  // if (id != cache_id_) {
+  //   cache_id_ = id;
+  //   edm::ESHandle<L1TUtmTriggerMenu> menu;
+  //  iSetup.get<L1TUtmTriggerMenuRcd>().get(menu);
+  edm::Handle<GlobalAlgBlkBxCollection> ugt;
+  iEvent.getByToken(ugt_token_, ugt);
+  const GlobalAlgBlk* L1uGT(nullptr);
+    if (ugt.isValid()) {
+    L1uGT = &ugt->at(0, 0);
+    //cout<<"The ugtValid is working"<<endl;
+  }
+  //  }
+  //GlobalAlgBlk* L1uGT = new GlobalAlgBlk();
+
+  //bool passEvents = false;
+    if(L1uGT != 0){
+      //cout<<"The pointer is working"<<endl;
+      std::vector<bool> m_algoDecisionFinal = L1uGT->getAlgoDecisionFinal();
+      // // cout<<m_algoDecisionFinal<<endl;
+      for(size_t s = 0; s < m_algoDecisionFinal.size(); s++){
+	//   //  cout<<m_algoDecisionFinal[s]<<endl;
+	if(s<458 && m_algoDecisionFinal[s] > 0){
+	  passEvents = true;
+	  //	  cout<<"success"<<" "<<s<<endl; 
+	           break;
 	}
-      //      int prescale = l1GtUtils.prescales()[bitNr].second;
-      //     if(bitNr<458){
-      //      std::cout <<"   "<<bitNr<<" "<<bitName<<" "<<passFinal<<std::endl;
-		 //      }
-    
-       }
-      return passEvents;  
- }
+      }          
+    }
+//   }
+   return passEvents;
+
+}
 
   
 // ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
