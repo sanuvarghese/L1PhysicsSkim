@@ -4,10 +4,10 @@ from data import *
 # STEAM Customization #
 
 # Options
-nEvents=-1           # number of events to process
+nEvents=100           # number of events to process
 #switchL1PS=False       # apply L1 PS ratios to switch to tighter column
 #columnL1PS=1           # choose the tighter column ( 0 <=> tightest )
-outputName="L1.root"  # output file name
+outputName="L1T.root"  # output file name
 
 # Input
 from list_cff import inputFileNames
@@ -41,8 +41,11 @@ def insert_modules_after(process, target, *modules):
 
 process.L1PhysicsFilter = cms.EDFilter("L1PhysicsFilter",
                                        hltProcess=cms.string("HLT2"),
-                                       stageL1Trigger=cms.uint32(2),
-                                       maxBitNr=cms.uint32(458)
+                                       #stageL1Trigger=cms.uint32(2),
+                                       #maxBitNr=cms.uint32(68)
+                                       ugtToken = cms.InputTag("simGtStage2Digis")
+                                       #ugtToken = cms.string("gtStage2Digis")
+                                      # ugtToken = cms.InputTag("gtStage2Digis") 
                                        )
 
 process.l1filter_step = cms.Path(process.L1PhysicsFilter)
@@ -59,6 +62,8 @@ process.hltOutputTriggerResults = cms.OutputModule( "PoolOutputModule",
       )
 process.l1filteroutput = cms.EndPath(process.hltOutputTriggerResults)
 process.schedule.append(process.l1filteroutput)
+
+print(process.schedule)
 # Customisation from command line
 
 # Add early deletion of temporary data products to reduce peak memory need
