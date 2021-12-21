@@ -41,10 +41,7 @@ def insert_modules_after(process, target, *modules):
 
 process.L1PhysicsFilter = cms.EDFilter("L1PhysicsFilter",
                                        hltProcess=cms.string("HLT2"),
-                                       #stageL1Trigger=cms.uint32(2),
-                                       #maxBitNr=cms.uint32(68)
                                        ugtToken = cms.InputTag("simGtStage2Digis")
-                                       #ugtToken = cms.string("gtStage2Digis")
                                       # ugtToken = cms.InputTag("gtStage2Digis") 
                                        )
 
@@ -64,15 +61,6 @@ process.l1filteroutput = cms.EndPath(process.hltOutputTriggerResults)
 process.schedule.append(process.l1filteroutput)
 
 print(process.schedule)
-# Customisation from command line
 
-# Add early deletion of temporary data products to reduce peak memory need
-#from Configuration.StandardSequences.earlyDeleteSettings_cff import customiseEarlyDelete
-#process = customiseEarlyDelete(process)
 
-#process.hltOutputTriggerResults = cms.OutputModule( "PoolOutputModule",
-#         fileName = cms.untracked.string( "FilteredOutput.root" ),
-#      )
 
-# End adding early deletion
-#print process.schedule
