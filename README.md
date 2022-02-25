@@ -99,14 +99,14 @@ Change the process name from "RAW2DIGI" to "HLT2"
 #### Applying Prescales
 Add the following lines at the end of the data.py config  file
 ```diff
-+ process.load('L1Trigger.L1TGlobal.PrescalesVetos_cff')
-+ process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
-+ process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
-+ process.L1TGlobalPrescalesVetos.PrescaleXMLFile = cms.string('l1prescales_L1MenuCollisions2022_v5.xml')      
-+ process.L1TGlobalPrescalesVetos.FinOrMaskXMLFile = cms.string('mask_L1MenuCollisions2022_v5.xml')  
-+ process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
-+ process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
-+ process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale column at 2e34
+ process.load('L1Trigger.L1TGlobal.PrescalesVetos_cff')
+ process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
+ process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
+ process.L1TGlobalPrescalesVetos.PrescaleXMLFile = cms.string('l1prescales_L1MenuCollisions2022_v5.xml')      
+ process.L1TGlobalPrescalesVetos.FinOrMaskXMLFile = cms.string('mask_L1MenuCollisions2022_v5.xml')  
+ process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
+ process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
+ process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale column at 2e34
 ```  
 
 
