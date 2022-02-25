@@ -9,16 +9,18 @@ ssh -XY <username>@lxplus.cern.ch
 ## Environment Setup
 Setup the environment according to the [official instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions).
 ```
-cmsrel CMSSW_12_0_2
-cd CMSSW_12_0_2/src
+cmsrel CMSSW_12_3_0_pre1
+cd CMSSW_12_3_0_pre1/src
 cmsenv
 git cms-init
 git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline l1t-integration-CMSSW_12_0_2
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v110.0
-git cms-addpkg HLTrigger/HLTcore
+git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v119.0
+git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
+
+
 git cms-checkdeps -A -a
-git cms-addpkg DataFormats/L1TGlobal  
+
 
 scram b -j 8
 
@@ -31,10 +33,14 @@ git cms-addpkg L1Trigger/L1TCommon
 ★ Add the latest L1Trigger/L1TGlobal package:
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
-★ Upload the XML file into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
+★ Upload the Menu,Prescale and mask XML files into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
+cp  YOURXML.xml   L1Trigger/L1TGlobal/data/Luminosity/startup/.
+wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/l1prescales_L1MenuCollisions2022_v5.xml .
+wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/mask_L1MenuCollisions2022_v5.xml
+
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
-+ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_1.xml')
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_2.xml')
 
 scram b -j 8
 ```
@@ -81,6 +87,8 @@ cmsDriver.py l1Ntuple -s L1REPACK:uGT,RAW2DIGI --python_filename=data.py -n 500 
 If you get an "import commands" error(You will get this error if you use 12_0_X, taken care of in higher releases),replace the "import commands" line in L1Trigger/Configuration/python/customiseUtils.py with "import subprocess" ("commands" is deprecated for python 3 but I dont think it is used anywhere!)  
 
 Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
+
+### L1T emulation
  
 #### After cmsDriver finishes running, make the following changes in the newly created data.py file.  
 Change the process name from "RAW2DIGI" to "HLT2"
@@ -88,6 +96,19 @@ Change the process name from "RAW2DIGI" to "HLT2"
 - process = cms.Process('RAW2DIGI',Run2_2018)
 + process = cms.Process('HLT2',Run2_2018)
 ```  
+#### Applying Prescales
+Add tha following lines to the end of the data.py config  file
+```diff
++ process.load('L1Trigger.L1TGlobal.PrescalesVetos_cff')
++ process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
++ process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
++ process.L1TGlobalPrescalesVetos.PrescaleXMLFile = cms.string('l1prescales_L1MenuCollisions2022_v5.xml')      
++ process.L1TGlobalPrescalesVetos.FinOrMaskXMLFile = cms.string('mask_L1MenuCollisions2022_v5.xml')  
++ process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
++ process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
++ process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale column at 2e34
+```  
+
 
 
 ## Creating and submiting Jobs on Condor
