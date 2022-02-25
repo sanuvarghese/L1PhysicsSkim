@@ -97,7 +97,7 @@ Change the process name from "RAW2DIGI" to "HLT2"
 + process = cms.Process('HLT2',Run2_2018)
 ```  
 #### Applying Prescales
-Add tha following lines to the end of the data.py config  file
+Add the following lines at the end of the data.py config  file
 ```diff
 + process.load('L1Trigger.L1TGlobal.PrescalesVetos_cff')
 + process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
