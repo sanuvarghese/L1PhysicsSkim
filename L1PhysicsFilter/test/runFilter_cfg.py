@@ -7,7 +7,7 @@ from data import *
 nEvents=100           # number of events to process
 #switchL1PS=False       # apply L1 PS ratios to switch to tighter column
 #columnL1PS=1           # choose the tighter column ( 0 <=> tightest )
-outputName="L1T.root"  # output file name
+outputName="L1.root"  # output file name
 
 # Input
 from list_cff import inputFileNames
