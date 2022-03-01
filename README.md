@@ -117,13 +117,14 @@ cmsRun runFilter_cfg.py
 You will get as output the Skimmed File L1.root. 
 
 Verify that the filter actually worked!
-
+```
 edmFileUtils L1.root
+```
 ## Creating and submiting Jobs on Condor
 
 Create an output directory for your future root files:  
 ```
-mkdir /path/to/output/dir
+mkdir -p /path/to/output/dir
 ```
 Change the nEvents in runFilter_cfg.py to -1
  
