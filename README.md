@@ -16,6 +16,11 @@ git cms-init
 git cms-merge-topic 36919
 git cms-addpkg L1Trigger/L1TGlobal
 git cms-addpkg L1Trigger/Configuration
+git-cms-addpkg EventFilter/L1TRawToDigi
+git-cms-addpkg L1Trigger/L1TCaloLayer1/
+git-cms-addpkg L1Trigger/L1TCalorimeter/
+git-cms-addpkg L1Trigger/L1TNtuples/
+git-cms-addpkg SimCalorimetry/HcalTrigPrimAlgos
 
 
 git cms-checkdeps -A -a
@@ -29,10 +34,9 @@ Here you will be customising the L1 emulator using the your new L1 menu. For mor
 ```diff
 ★ Check if you have the package L1Trigger/L1TCommon, otherwise add it:
 git cms-addpkg L1Trigger/L1TCommon
-★ Add the latest L1Trigger/L1TGlobal package:
-git cms-addpkg L1Trigger/L1TGlobal
-mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
+
 ★ Upload the Menu,Prescale and mask XML files into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
+mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/L1Menu_Collisions2022_v0_1_5.xml
 wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/l1prescales_L1MenuCollisions2022_v5.xml .
 wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/mask_L1MenuCollisions2022_v5.xml
