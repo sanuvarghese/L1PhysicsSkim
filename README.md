@@ -118,7 +118,7 @@ You will get as output the Skimmed File L1.root.
 
 Verify that the filter actually worked!
 ```
-edmFileUtils L1.root
+edmFileUtil L1.root
 ```
 ## Creating and submiting Jobs on Condor
 
