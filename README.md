@@ -110,7 +110,10 @@ process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
 process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
 process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale column at 2e34
 ```  
-
+#### Now run the Skimmer
+```
+cmsRun runFilter_cfg.py
+```
 
 
 ## Creating and submiting Jobs on Condor
@@ -119,6 +122,8 @@ Create an output directory for your future root files:
 ```
 mkdir /path/to/output/dir
 ```
+Change the nevents in runFilter_cfg.py to -1
+ 
 Create condor jobs for data by running the cmsCondorData.py script, for MC by running the cmsCondorMC.py(will be available soon). There are 3 mandatory arguments and 3 options:
 - The 1st argument is always runFilter_cfg.py.
 - The 2nd argument is the path to the top of your CMSSW release.
