@@ -47,16 +47,21 @@ process.L1PhysicsFilter = cms.EDFilter("L1PhysicsFilter",
 
 process.l1filter_step = cms.Path(process.L1PhysicsFilter)
 process.schedule.append(process.l1filter_step)
-
 process.hltOutputTriggerResults = cms.OutputModule( "PoolOutputModule",
         fileName = cms.untracked.string(outputName),
-        SelectEvents = cms.untracked.PSet( 
+	    SelectEvents = cms.untracked.PSet(
         SelectEvents = cms.vstring("l1filter_step")
         ),
-        outputCommands = cms.untracked.vstring('drop *',
-                                       'keep *')
-                                        
-      )
+        outputCommands = cms.untracked.vstring('keep *',
+                                               'drop *_*_*_HLT2',
+                                               "drop *_*_*_HLT",
+                                               "keep *_addPileupInfo_*_*",
+	                                       "keep *_simHcalUnsuppressedDigis_*_*",
+                                               "drop *_rawDataCollector_*_*",
+                                               "keep *_rawDataCollector_*_HLT2")
+                                                  )
+
+
 process.l1filteroutput = cms.EndPath(process.hltOutputTriggerResults)
 process.schedule.append(process.l1filteroutput)
 
