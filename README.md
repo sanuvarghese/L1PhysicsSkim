@@ -9,14 +9,13 @@ ssh -XY <username>@lxplus.cern.ch
 ## Environment Setup
 Setup the environment according to the [official instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions).
 ```
-cmsrel CMSSW_12_3_0_pre1
-cd CMSSW_12_3_0_pre1/src
+cmsrel CMSSW_12_3_0_pre5
+cd CMSSW_12_3_0_pre5/src
 cmsenv
-git cms-init
-git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
-git fetch cms-l1t-offline l1t-integration-CMSSW_12_3_0
-git cms-merge-topic -u cms-l1t-offline:l1t-integration-v119.0
-git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
+git cms-init 
+git cms-merge-topic 36919
+git cms-addpkg L1Trigger/L1TGlobal
+git cms-addpkg L1Trigger/Configuration
 
 
 git cms-checkdeps -A -a
@@ -34,13 +33,13 @@ git cms-addpkg L1Trigger/L1TCommon
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
 ★ Upload the Menu,Prescale and mask XML files into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
-cp  YOURXML.xml   L1Trigger/L1TGlobal/data/Luminosity/startup/.
+wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/L1Menu_Collisions2022_v0_1_5.xml
 wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/l1prescales_L1MenuCollisions2022_v5.xml .
 wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/mask_L1MenuCollisions2022_v5.xml
 
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
-+ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_2.xml')
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_5.xml')
 
 scram b -j 8
 ```
@@ -98,15 +97,14 @@ Change the process name from "RAW2DIGI" to "HLT2"
 ```  
 #### Applying Prescales
 Add the following lines at the end of the data.py config  file
-```diff
- process.load('L1Trigger.L1TGlobal.PrescalesVetos_cff')
- process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
- process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
- process.L1TGlobalPrescalesVetos.PrescaleXMLFile = cms.string('l1prescales_L1MenuCollisions2022_v5.xml')      
- process.L1TGlobalPrescalesVetos.FinOrMaskXMLFile = cms.string('mask_L1MenuCollisions2022_v5.xml')  
- process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
- process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
- process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale column at 2e34
+```
+process.load('L1Trigger.L1TGlobal.PrescalesVetos_cff')
+process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
+process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
+process.L1TGlobalPrescalesVetos.PrescaleXMLFile = cms.string('l1prescales_L1MenuCollisions2022_v5.xml')      
+process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
+process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
+process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale column at 2e34
 ```  
 
 
