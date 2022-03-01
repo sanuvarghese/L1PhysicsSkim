@@ -122,7 +122,7 @@ Create an output directory for your future root files:
 ```
 mkdir /path/to/output/dir
 ```
-Change the nevents in runFilter_cfg.py to -1
+Change the nEvents in runFilter_cfg.py to -1
  
 Create condor jobs for data by running the cmsCondorData.py script, for MC by running the cmsCondorMC.py(will be available soon). There are 3 mandatory arguments and 3 options:
 - The 1st argument is always runFilter_cfg.py.
