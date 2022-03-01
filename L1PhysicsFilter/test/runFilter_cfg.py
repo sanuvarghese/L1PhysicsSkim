@@ -4,7 +4,7 @@ from data import *
 # STEAM Customization #
 
 # Options
-nEvents=100           # number of events to process
+nEvents=5000           # number of events to process
 #switchL1PS=False       # apply L1 PS ratios to switch to tighter column
 #columnL1PS=1           # choose the tighter column ( 0 <=> tightest )
 outputName="L1.root"  # output file name
