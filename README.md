@@ -114,8 +114,11 @@ process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale
 ```
 cmsRun runFilter_cfg.py
 ```
+You will get as output the Skimmed File L1.root. 
 
+Verify that the filter actually worked!
 
+edmFileUtils L1.root
 ## Creating and submiting Jobs on Condor
 
 Create an output directory for your future root files:  
