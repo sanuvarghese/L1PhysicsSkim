@@ -78,7 +78,7 @@ bool L1PhysicsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) 
       // // cout<<m_algoDecisionFinal<<endl;
       for(size_t s = 0; s < m_algoDecisionFinal.size(); s++){
 	//   //  cout<<m_algoDecisionFinal[s]<<endl;
-	if(s<458 && m_algoDecisionFinal[s] > 0){
+	if(m_algoDecisionFinal[s] > 0){
 	  passEvents = true;
 	  //	  cout<<"success"<<" "<<s<<endl; 
 	           break;
