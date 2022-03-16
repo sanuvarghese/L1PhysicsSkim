@@ -23,20 +23,6 @@ wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/
 cd -
 
 ```
-## Customisation of L1 Menu 
-Here you will be customising the L1 emulator using the your new L1 menu. For more details follow Elisa Fontanesi's [L1 emulator tutorial](https://indico.cern.ch/event/1060362/contributions/4455932/attachments/2286815/3937192/L1T_Tutorial_Emulator.pdf) 
-```diff
-★ Check if you have the package L1Trigger/L1TCommon, otherwise add it:
-git cms-addpkg L1Trigger/L1TCommon
-git cms-addpkg L1Trigger/Configuration
-
-★ Upload the Menu,Prescale and mask XML files into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
-mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
-cd L1Trigger/L1TGlobal/data/Luminosity/startup/
-wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/L1Menu_Collisions2022_v0_1_5.xml
-wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/l1prescales_L1MenuCollisions2022_v5.xml .
-wget https://github.com/cms-l1-dpg/L1MenuRun3/blob/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/mask_L1MenuCollisions2022_v5.xml
-cd -
 
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
