@@ -9,24 +9,18 @@ ssh -XY <username>@lxplus.cern.ch
 ## Environment Setup
 Setup the environment according to the [official instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions).
 ```
-cmsrel CMSSW_12_3_0_pre5
-cd CMSSW_12_3_0_pre5/src
+cmsrel CMSSW_12_3_0_pre6
+cd CMSSW_12_3_0_pre6/src/
 cmsenv
-git cms-init 
-git cms-merge-topic 36919
+git cms-init
 git cms-addpkg L1Trigger/L1TGlobal
-git cms-addpkg L1Trigger/Configuration
-git-cms-addpkg EventFilter/L1TRawToDigi
-git-cms-addpkg L1Trigger/L1TCaloLayer1/
-git-cms-addpkg L1Trigger/L1TCalorimeter/
-git-cms-addpkg L1Trigger/L1TNtuples/
-git-cms-addpkg SimCalorimetry/HcalTrigPrimAlgos
-
-
-git cms-checkdeps -A -a
-
-
-scram b -j 8
+mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
+cd L1Trigger/L1TGlobal/data/Luminosity/startup
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v0_1_2/L1Menu_Collisions2022_v0_1_2.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/L1Menu_Collisions2022_v0_1_5.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v5.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v5.xml
+cd -
 
 ```
 ## Customisation of L1 Menu 
@@ -34,6 +28,7 @@ Here you will be customising the L1 emulator using the your new L1 menu. For mor
 ```diff
 ★ Check if you have the package L1Trigger/L1TCommon, otherwise add it:
 git cms-addpkg L1Trigger/L1TCommon
+git cms-addpkg L1Trigger/Configuration
 
 ★ Upload the Menu,Prescale and mask XML files into the directory L1Trigger/L1TGlobal/data/Luminosity/startup/
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup/
