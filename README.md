@@ -21,8 +21,8 @@ wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/
 wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v5.xml
 wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v5.xml
 cd -
-
 ```
+```diff
 
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
