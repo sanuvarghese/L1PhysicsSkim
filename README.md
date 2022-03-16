@@ -23,7 +23,7 @@ wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/
 cd -
 ```
 ```diff
-
+git cms-addpkg L1Trigger/Configuration
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
 + process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_5.xml')
