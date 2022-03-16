@@ -84,14 +84,14 @@ Change the process name from "RAW2DIGI" to "HLT2"
 ```  
 #### Applying Prescales
 Add the following lines at the end of the data.py config  file
-```
-process.load('L1Trigger.L1TGlobal.PrescalesVetos_cff')
+```process.load('L1Trigger.L1TGlobal.PrescalesVetosFract_cff')
 process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
 process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
-process.L1TGlobalPrescalesVetos.PrescaleXMLFile = cms.string('l1prescales_L1MenuCollisions2022_v5.xml')      
+process.L1TGlobalPrescalesVetosFract.PrescaleXMLFile = cms.string('UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v5.xml')   
+process.L1TGlobalPrescalesVetosFract.FinOrMaskXMLFile = cms.string('UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v5.xml')  
 process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
 process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
-process.simGtStage2Digis.PrescaleSet = cms.uint32(2) # 2 corresponds to Prescale column at 2e34
+process.simGtStage2Digis.PrescaleSet = cms.uint32(6) #6 corresponds to Prescale column at 1.1e34 (At the moment,It is advised to run the skim at very loose L1 PS column)
 ```  
 #### Now run the Skimmer
 ```
