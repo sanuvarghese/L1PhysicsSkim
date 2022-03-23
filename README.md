@@ -116,11 +116,11 @@ Create condor jobs for data by running the cmsCondorData.py script, for MC by ru
 - The 2nd argument is the path to the top of your CMSSW release.
 - The 3rd argument is the path to the output directory for your root files.
 - The -n option allows you to set the number of input root files processed per job. 
-- The -q option allows you to set the "flavour" of your job. Each flavour corresponds to a different maximum running time. The default is "workday" (= 8h), but "longlunch" (= 2h) is usually enough.
+- The -q option allows you to set the "flavour" of your job. Each flavour corresponds to a different maximum running time. The default is "workday" (= 8h), but "longlunch" (= 2h) is usually enough(It is recommended to set n = 10-20 and flavor=workday to get decent stats for each Job).
 - You can use the -p option to attach your grid proxy to your jobs (specify the path to your proxy after -p).
 
 ```
-./cmsCondorData.py runFilter_cfg.py <path to your CMSSW src directory> <path to your output directory >  -n 1 -q longlunch -p /afs/cern.ch/user/<first letter>/<username>/private/x509up_<user proxy>
+./cmsCondorData.py runFilter_cfg.py <path to your CMSSW src directory> <path to your output directory >  -n 20 -q workday -p /afs/cern.ch/user/<first letter>/<username>/private/x509up_<user proxy>
 ```
 Submit All Jobs on Condor
 
