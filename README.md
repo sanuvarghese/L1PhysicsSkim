@@ -66,7 +66,7 @@ As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 
 The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
 ```
-cmsDriver.py l1Ntuple -s L1REPACK:uGT,RAW2DIGI --python_filename=data.py -n 500 --no_output --era=Run2_2018 --data --conditions=123X_dataRun2_v1 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML  --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root --lumiToProcess=/afs/cern.ch/work/s/savarghe/public/L1Skim/myRealjson.txt --nThreads=4
+cmsDriver.py l1Ntuple -s L1REPACK:uGT,RAW2DIGI --python_filename=data.py -n 500 --no_output --era=Run2_2018 --data --conditions=123X_dataRun2_v1 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML  --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root --lumiToProcess=/afs/cern.ch/work/s/savarghe/public/L1Skim/myRealjson.txt 
 
 
 ```  
