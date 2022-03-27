@@ -67,7 +67,7 @@ As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 
 The L1T emulation is invoked via cmsDriver.py command step from the L1Trigger directory. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
 ```
-cmsDriver.py l1Ntuple -s L1REPACK:uGT,RAW2DIGI --python_filename=data.py -n 500 --no_output --era=Run2_2018 --data --conditions=123X_dataRun2_v1 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML  --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root --lumiToProcess=/afs/cern.ch/work/s/savarghe/public/L1Skim/myRealjson.txt 
+cmsDriver.py l1Ntuple -s L1REPACK:uGT,RAW2DIGI --python_filename=data.py -n 500 --no_output --era=Run2_2018 --data --conditions=123X_dataRun2_v1 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML  --filein=/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root --lumiToProcess=/afs/cern.ch/work/s/savarghe/public/L1Skim/myRealjson.txt --nThreads-4 --processName=HLT2
 
 
 ```  
@@ -77,14 +77,8 @@ Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the
 
 ### L1T emulation
  
-#### After cmsDriver finishes running, make the following changes in the newly created data.py file.  
-Change the process name from "RAW2DIGI" to "HLT2"
-```diff
-- process = cms.Process('RAW2DIGI',Run2_2018)
-+ process = cms.Process('HLT2',Run2_2018)
-```  
 #### Applying Prescales
-Add the following lines at the end of the data.py config  file
+Add the following lines at the end of the newly created data.py config  file
 ```process.load('L1Trigger.L1TGlobal.PrescalesVetosFract_cff')
 process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
 process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
