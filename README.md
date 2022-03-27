@@ -74,8 +74,6 @@ cmsDriver.py l1Ntuple -s L1REPACK:uGT,RAW2DIGI --python_filename=data.py -n 500 
 If you get an "import commands" error(You will get this error if you use 12_0_X, taken care of in higher releases),replace the "import commands" line in L1Trigger/Configuration/python/customiseUtils.py with "import subprocess" ("commands" is deprecated for python 3 but I dont think it is used anywhere!)  
 
 Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the data.py config file on which we will apply the L1 Skim Filter(which is why we omitted the --customise=L1Trigger/L1TNtuples/customiseL1Ntuple.L1NtupleRAWEMU option).  
-
-### L1T emulation
  
 #### Applying Prescales
 Add the following lines at the end of the newly created data.py config  file
