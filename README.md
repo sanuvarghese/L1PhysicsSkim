@@ -14,6 +14,7 @@ cd CMSSW_12_3_0_pre6/src/
 cmsenv
 git cms-init
 git cms-addpkg L1Trigger/L1TGlobal
+git cms-merge-topic Sam-Harper:L1PSLumiSecFix_1230pre6
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
 wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v0_1_2/L1Menu_Collisions2022_v0_1_2.xml
@@ -91,7 +92,9 @@ process.L1TGlobalPrescalesVetosFract.PrescaleXMLFile = cms.string('UGT_BASE_RS_P
 process.L1TGlobalPrescalesVetosFract.FinOrMaskXMLFile = cms.string('UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v5.xml')  
 process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
 process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
-process.simGtStage2Digis.PrescaleSet = cms.uint32(6) #6 corresponds to Prescale column at 1.1e34 (At the moment,It is advised to run the skim at very loose L1 PS column)
+process.simGtStage2Digis.PrescaleSet = cms.uint32(5) #5 corresponds to Prescale column at 1.5e34 (At the moment,It is advised to run the skim at this L1 PS column for EZB dataset)
+process.simGtStage2Digis.resetPSCountersEachLumiSec = cms.bool(False)
+
 ```  
 #### Now run the Skimmer
 ```
