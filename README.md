@@ -17,17 +17,16 @@ git cms-addpkg L1Trigger/L1TGlobal
 git cms-merge-topic Sam-Harper:L1PSLumiSecFix_1230pre6
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v0_1_2/L1Menu_Collisions2022_v0_1_2.xml
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/L1Menu_Collisions2022_v0_1_5.xml
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v5.xml
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v5.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v0_1_2/L1Menu_Collisions2022_v1_0_0.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/preliminary/L1Menu_Collisions2022_v0_1_5/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v1_0_0.xml
+cp /afs/cern.ch/work/s/savarghe/public/L1Skim/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v1_0_0.xml .
 cd -
 ```
 ```diff
 git cms-addpkg L1Trigger/Configuration
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
-+ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v0_1_5.xml')
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_0_0.xml')
 
 scram b -j 8
 ```
