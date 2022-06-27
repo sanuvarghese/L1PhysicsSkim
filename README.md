@@ -20,7 +20,6 @@ git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trig
 
 git cms-checkdeps -A -a
 
-scram build -j 32
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
