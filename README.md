@@ -9,24 +9,35 @@ ssh -XY <username>@lxplus.cern.ch
 ## Environment Setup
 Setup the environment according to the [official instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions).
 ```
-cmsrel CMSSW_12_3_0_pre6
-cd CMSSW_12_3_0_pre6/src/
+cmsrel CMSSW_12_4_0
+cd CMSSW_12_4_0/src
 cmsenv
 git cms-init
+git remote add cms-l1t-offline git@github.com:cms-l1t-offline/cmssw.git
+git fetch cms-l1t-offline l1t-integration-CMSSW_12_4_0
+git cms-merge-topic -u cms-l1t-offline:l1t-integration-v129.0-CMSSW_12_4_0
+git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
+
+git cms-checkdeps -A -a
+
+scram build -j 32
 git cms-addpkg L1Trigger/L1TGlobal
-git cms-merge-topic Sam-Harper:L1PSLumiSecFix_1230pre6
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_0_0/L1Menu_Collisions2022_v1_0_0.xml
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_0_0/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v1_0_0.xml
-cp /afs/cern.ch/work/s/savarghe/public/L1Skim/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v1_0_0.xml .
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/L1Menu_Collisions2022_v1_2_0.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v1_2_0.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/PrescaleTable/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v1_2_0.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/L1Menu_Collisions2022_v1_2_0.xml
+
 cd -
+
+git cms-addpkg L1Trigger/Configuration
 ```
 ```diff
 git cms-addpkg L1Trigger/Configuration
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
-- process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2016_v2c.xml') 
-+ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_0_0.xml')
+- process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_1_0.xml') 
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_2_0.xml')
 
 scram b -j 8
 ```
