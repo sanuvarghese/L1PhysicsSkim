@@ -26,8 +26,7 @@ mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
 wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/L1Menu_Collisions2022_v1_2_0.xml
 wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2022_v1_2_0.xml
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/PrescaleTable/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v1_2_0.xml
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2022_v1_2_0/L1Menu_Collisions2022_v1_2_0.xml
+cp /afs/cern.ch/work/s/savarghe/public/L1Skim/UGT_BASE_RS_PRESCALES_L1MenuCollisions2022_v1_2_0.xml .
 
 cd -
 
@@ -96,6 +95,7 @@ process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
 process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
 process.simGtStage2Digis.PrescaleSet = cms.uint32(4) #5 corresponds to Prescale column at 1.5e34 (At the moment,It is advised to run the skim at this L1 PS column for EZB dataset)
 process.simGtStage2Digis.resetPSCountersEachLumiSec = cms.bool(False)
+process.simGtStage2Digis.semiRandomInitialPSCounters = cms.bool(True)
 
 ```  
 #### Now run the Skimmer
