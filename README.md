@@ -29,7 +29,6 @@ cp /afs/cern.ch/work/s/savarghe/public/L1Skim/UGT_BASE_RS_PRESCALES_L1MenuCollis
 
 cd -
 
-git cms-addpkg L1Trigger/Configuration
 ```
 ```diff
 git cms-addpkg L1Trigger/Configuration
