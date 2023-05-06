@@ -54,14 +54,6 @@ with open(csv_file, mode='r') as csv_file:
         xml_row = ET.SubElement(rows, 'row')
         xml_row.text = algo_index + ',' + ','.join(prescale_values)
 
-        # create param element for each algorithm and its prescales
-        #algo_param = ET.SubElement(prescales, 'value')
-        #algo_param.set('index', str(algo_index))
-        for i in range(len(prescale_values)):
-            prescale_value = ET.SubElement(algo_param, 'value')
-            prescale_value.text = str(prescale_values[i])
-            prescale_value.set('index', str(i))
-
 # add header comments to the root element
 header_comments = [
     'csv to xml Prescale Convertor',
