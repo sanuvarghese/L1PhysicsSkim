@@ -1,10 +1,10 @@
 <run-settings id="uGT">
     <!--from Collisions2022 (L1Menu_Collisions2022_v0_1_5)-->
-    <!--Generated on Sat May 06 2023 11:22:01 -->
+    <!--Generated on Sat May 06 2023 11:56:09 -->
     <!--TSG Tool v3.1 - uGT Prescale Generator-->
     <context id="uGtProcessor">
-        <columns>algo/prescale-index,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17</columns>
-        <types>uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint</types>
+        <columns>algo/prescale-index,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21</columns>
+        <types>uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint,uint</types>
         <rows>
             <row>0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
             <row>1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</row>
