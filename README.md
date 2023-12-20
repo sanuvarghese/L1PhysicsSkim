@@ -9,8 +9,8 @@ ssh -XY <username>@lxplus.cern.ch
 ## Environment Setup
 Setup the environment according to the [official instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions).
 ```
-cmsrel CMSSW_13_0_0
-cd CMSSW_13_0_0/src
+cmsrel CMSSW_13_3_0
+cd CMSSW_13_3_0/src
 cmsenv
 git cms-init
 
@@ -19,9 +19,9 @@ git cms-checkdeps -A -a
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2023_v1_0_0/L1Menu_Collisions2023_v1_0_0.xml
-https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2023_v1_0_0/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_0_0.xml
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2023_v1_0_0/PrescaleTable/UGT_BASE_RS_PRESCALES_L1MenuCollisions2023_v1_0_0.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2023_v1_3_0_for2024_v2/L1Menu_Collisions2023_v1_3_0_for2024_v2.xml
+cp /afs/cern.ch/work/s/savarghe/public/2024-Prescalefiles/UGT_BASE_RS_PRESCALES_L1Menu_Collisions2023_v1_3_0_for2024_v2.xml .
+cp UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_3_0.xml .
 cd -
 
 ```
@@ -29,7 +29,7 @@ cd -
 git cms-addpkg L1Trigger/Configuration
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_1_0.xml') 
-+ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2023_v1_0_0.xml')
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2023_v1_3_0_for2024_v2.xml')
 
 scram b -j 8
 ```
@@ -82,11 +82,11 @@ Add the following lines at the end of the newly created data.py config  file
 ```process.load('L1Trigger.L1TGlobal.PrescalesVetosFract_cff')
 process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
 process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
-process.L1TGlobalPrescalesVetosFract.PrescaleXMLFile = cms.string('UGT_BASE_RS_PRESCALES_L1MenuCollisions2023_v1_0_0.xml')   
-process.L1TGlobalPrescalesVetosFract.FinOrMaskXMLFile = cms.string('UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_0_0.xml')  
+process.L1TGlobalPrescalesVetosFract.PrescaleXMLFile = cms.string('UGT_BASE_RS_PRESCALES_L1Menu_Collisions2023_v1_3_0_for2024_v2.xml')   
+process.L1TGlobalPrescalesVetosFract.FinOrMaskXMLFile = cms.string('UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_3_0.xml')  
 process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
 process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
-process.simGtStage2Digis.PrescaleSet = cms.uint32(3) #4 corresponds to Prescale column at 2e34 (At the moment,It is advised to run the skim at this L1 PS column for EZB dataset)
+process.simGtStage2Digis.PrescaleSet = cms.uint32(1) #1 corresponds to Prescale column at 2e34 (At the moment,It is advised to run the skim at this L1 PS column for EZB dataset)
 process.simGtStage2Digis.resetPSCountersEachLumiSec = cms.bool(False)
 process.simGtStage2Digis.semiRandomInitialPSCounters = cms.bool(True)
 
