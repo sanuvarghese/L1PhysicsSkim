@@ -21,7 +21,7 @@ mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
 wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2023_v1_3_0_for2024_v2/L1Menu_Collisions2023_v1_3_0_for2024_v2.xml
 cp /afs/cern.ch/work/s/savarghe/public/2024-Prescalefiles/UGT_BASE_RS_PRESCALES_L1Menu_Collisions2023_v1_3_0_for2024_v2.xml .
-cp UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_3_0.xml .
+cp /afs/cern.ch/work/s/savarghe/public/2024-Prescalefiles/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_3_0.xml .
 cd -
 
 ```
