@@ -25,6 +25,7 @@ class L1PhysicsFilter : public edm::stream::EDFilter<> {
 private:
     
   std::string hltProcess_; //name of HLT process, usually "HLT"
+  std::vector<unsigned int> triggerCounts_; // Counter for each trigger bit 
   
 public:
   explicit L1PhysicsFilter(const edm::ParameterSet&);
@@ -46,7 +47,13 @@ L1PhysicsFilter::L1PhysicsFilter(const edm::ParameterSet& iConfig):
   ugt_token_(consumes<GlobalAlgBlkBxCollection>(iConfig.getParameter<edm::InputTag>("ugtToken")))
   //cache_id_(0)
 {
-
+triggerCounts_.resize(512, 0);
+}
+L1PhysicsFilter::~L1PhysicsFilter() {
+  // Print the trigger counts at the end                                                                                                  
+  for (size_t i = 0; i < triggerCounts_.size(); ++i) {
+    std::cout << "Trigger " << i << " fired " << triggerCounts_[i] << " times." << std::endl;
+  }
 }
 void L1PhysicsFilter::beginRun(const edm::Run& run,const edm::EventSetup& setup)
 {
