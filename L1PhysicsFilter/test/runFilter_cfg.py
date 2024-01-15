@@ -10,7 +10,7 @@ nEvents= 5000           # number of events to process
 outputName="L1.root"  # output file name
 
 # Input
-from list_cff import inputFileNames
+from list_cff_RunD import inputFileNames
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(inputFileNames),
     inputCommands = cms.untracked.vstring('keep *')
