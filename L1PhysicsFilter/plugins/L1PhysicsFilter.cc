@@ -29,7 +29,7 @@ private:
   
 public:
   explicit L1PhysicsFilter(const edm::ParameterSet&);
-  ~L1PhysicsFilter(){};
+  ~L1PhysicsFilter();
 
   //  static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
 
@@ -87,6 +87,7 @@ bool L1PhysicsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) 
 	//   //  cout<<m_algoDecisionFinal[s]<<endl;
 	if(m_algoDecisionFinal[s] > 0){
 	  passEvents = true;
+	  triggerCounts_[s]++; 
 	  //	  cout<<"success"<<" "<<s<<endl; 
 	           break;
 	}
