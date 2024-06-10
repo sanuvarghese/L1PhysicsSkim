@@ -9,8 +9,8 @@ ssh -XY <username>@lxplus.cern.ch
 ## Environment Setup
 Setup the environment according to the [official instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions).
 ```
-cmsrel CMSSW_13_3_0
-cd CMSSW_13_3_0/src
+cmsrel CMSSW_14_0_6
+cd CMSSW_14_0_6/src
 cmsenv
 git cms-init
 
@@ -69,7 +69,7 @@ As an example, the list_cff.py for the EphemeralZeroBias samples for run 323755 
 The L1T emulation is invoked via cmsDriver.py command. for more deatils about cmsDriver and its options, follow this [twiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideCmsDriver) .
 
 ```
-cmsDriver.py l1Ntuple -s L1REPACK:uGT,RAW2DIGI --python_filename=data.py -n 500 --no_output --era=Run3 --data --conditions=124X_dataRun3_Prompt_v4 --customise=L1Trigger/Configuration/customiseReEmul.L1TReEmulFromRAW --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML --filein=/store/data/Run2022F/EphemeralZeroBias0/RAW/v1/000/361/468/00000/52351179-2329-47d8-bffc-a01833bb1704.root  --nThreads=4 --processName=HLT2
+cmsDriver.py l1Ntuple -s L1REPACK:uGT --python_filename=data.py -n 500 --no_output --era=Run3 --data --conditions=140X_dataRun3_HLT_v3 --customise=L1Trigger/Configuration/customiseUtils.L1TGlobalMenuXML --filein=/store/data/Run2022F/EphemeralZeroBias0/RAW/v1/000/361/468/00000/52351179-2329-47d8-bffc-a01833bb1704.root  --nThreads=4 --processName=HLT2
 
 
 ```  
