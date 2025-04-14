@@ -89,7 +89,7 @@ bool L1PhysicsFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup) 
 	  passEvents = true;
 	  triggerCounts_[s]++; 
 	  //	  cout<<"success"<<" "<<s<<endl; 
-	           break;
+	    #       break; // commenting out this makes it slower but gives accurate seed counts for validation 
 	}
       }          
     }
