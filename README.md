@@ -9,8 +9,8 @@ ssh -XY <username>@lxplus.cern.ch
 ## Environment Setup
 Setup the environment according to the [official instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions).
 ```
-cmsrel CMSSW_14_0_6
-cd CMSSW_14_0_6/src
+cmsrel CMSSW_15_0_3
+cd CMSSW_15_0_3/src/
 cmsenv
 git cms-init
 
@@ -19,9 +19,9 @@ git cms-checkdeps -A -a
 git cms-addpkg L1Trigger/L1TGlobal
 mkdir -p L1Trigger/L1TGlobal/data/Luminosity/startup
 cd L1Trigger/L1TGlobal/data/Luminosity/startup
-wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/master/development/L1Menu_Collisions2023_v1_3_0_for2024_v2/L1Menu_Collisions2023_v1_3_0_for2024_v2.xml
-cp /afs/cern.ch/work/s/savarghe/public/2024-Prescalefiles/UGT_BASE_RS_PRESCALES_L1Menu_Collisions2023_v1_3_0_for2024_v2.xml .
-cp /afs/cern.ch/work/s/savarghe/public/2024-Prescalefiles/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_3_0.xml .
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/refs/heads/master/development/L1Menu_Collisions2025_v1_0_0/L1Menu_Collisions2025_v1_0_0.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/refs/heads/master/development/L1Menu_Collisions2025_v1_0_0/PrescaleTable/UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2025_v1_0_0.xml
+wget https://raw.githubusercontent.com/cms-l1-dpg/L1MenuRun3/refs/heads/master/development/L1Menu_Collisions2025_v1_0_0/PrescaleTable/UGT_BASE_RS_PRESCALES_L1Menu_Collisions2025_v1_0_0.xml
 cd -
 
 ```
@@ -29,7 +29,7 @@ cd -
 git cms-addpkg L1Trigger/Configuration
 ★ Edit the file L1Trigger/Configuration/python/customiseUtils.py by changing the L1TriggerMenuFile:
 - process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2022_v1_1_0.xml') 
-+ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2023_v1_3_0_for2024_v2.xml')
++ process.TriggerMenu.L1TriggerMenuFile = cms.string('L1Menu_Collisions2025_v1_0_0.xml')
 
 scram b -j 8
 ```
@@ -47,7 +47,7 @@ The L1 Skim should be run either on Zero Bias samples or MC. Do not run the skim
 voms-proxy-init --voms cms --valid 168:00
 cp /tmp/x509up_<user proxy> /afs/cern.ch/user/<letter>/<username>/private/  
 
-dasgoclient --query="file dataset=/EphemeralZeroBias1/Run2018D-v1/RAW and run=323755" > ZB1.txt
+dasgoclient --query="file dataset=/EphemeralZeroBias0/Run2024I-v1/RAW and run=386615" > ZB1.txt
 ```  
 You need to repeat it for EphemeralZeroBias{1-8} and combine the file paths into a single txt file   
 (eg $ cat ZB1.txt ZB2.txt .. ZB8.txt > ZB.txt)  
@@ -55,12 +55,8 @@ You need to repeat it for EphemeralZeroBias{1-8} and combine the file paths into
 Next step is to create a list_cff.py file in the format (edit the ZB.txt accordingly and rename to list_cff.py)
 ```
 inputFileNames=[
-'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/02506E54-CE47-A649-9F80-117E978DC69E.root',
-'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/08D7B1A7-B8C5-0944-9A69-B698A2BF52EB.root',
-'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/11FC721B-C288-2342-B356-317FD2457444.root',
-'/store/data/Run2018D/EphemeralZeroBias1/RAW/v1/000/323/755/00000/1507559B-D021-E648-8100-010C4698D4DB.root',
+'/store/data/Run2024I/EphemeralZeroBias0/RAW/v1/000/386/615/00000/67b4f3ff-ae49-4d3c-9357-fd7b13e42745.root',
 
-...
 
 ]
 ```
@@ -79,14 +75,14 @@ Note that our purpose here is not to get the Emulated L1 Ntuples, but to get the
  
 #### Applying Prescales
 Add the following lines at the end of the newly created data.py config  file
-```process.load('L1Trigger.L1TGlobal.PrescalesVetosFract_cff')
+```
 process.load('L1Trigger.L1TGlobal.simGtStage2Digis_cfi')
-process.load('L1Trigger.L1TGlobal.hackConditions_cff')                                                                                                       
-process.L1TGlobalPrescalesVetosFract.PrescaleXMLFile = cms.string('UGT_BASE_RS_PRESCALES_L1Menu_Collisions2023_v1_3_0_for2024_v2.xml')   
-process.L1TGlobalPrescalesVetosFract.FinOrMaskXMLFile = cms.string('UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2023_v1_3_0.xml')  
+process.load('L1Trigger.L1TGlobal.hackConditions_cff')                              
+process.L1TGlobalPrescalesVetosFract.PrescaleXMLFile = cms.string('UGT_BASE_RS_PRESCALES_L1Menu_Collisions2025_v1_0_0.xml')   
+process.L1TGlobalPrescalesVetosFract.FinOrMaskXMLFile = cms.string('UGT_BASE_RS_FINOR_MASK_L1MenuCollisions2025_v1_0_0.xml')  
 process.simGtStage2Digis.AlgorithmTriggersUnmasked = cms.bool(False)
 process.simGtStage2Digis.AlgorithmTriggersUnprescaled = cms.bool(False)
-process.simGtStage2Digis.PrescaleSet = cms.uint32(1) #1 corresponds to Prescale column at 2e34 (At the moment,It is advised to run the skim at this L1 PS column for EZB dataset)
+process.simGtStage2Digis.PrescaleSet = cms.uint32(1) #1 corresponds to Prescale column at 2e34 (At the moment,It is advised to run th>
 process.simGtStage2Digis.resetPSCountersEachLumiSec = cms.bool(False)
 process.simGtStage2Digis.semiRandomInitialPSCounters = cms.bool(True)
 
